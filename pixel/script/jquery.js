@@ -4,7 +4,7 @@ $(document).ready( function() {
 	var wWidth = $(document).width();
 	
 	setInterval(function() {animatePixel('.px_1', wHeight, wWidth);}, speed('fixed'));
-	setInterval(function() {spawnElement(wHeight, wWidth)}, 100);
+	setInterval(function() {spawnElement(wHeight, wWidth)}, 500);
 
 });
 

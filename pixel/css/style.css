@@ -8,29 +8,10 @@ body{
 
 .pixel{
 	position:absolute;
-	width:50px; height:50px;
+	width:4px; height:4px;
 }
 
-.pixel.px_1{background:red;}
-.pixel.px_2{background:blue;}
-.pixel.px_3{background:black;}
-.pixel.px_4{background:green;}
-.pixel.px_5{background:orange;}
-.pixel.px_6{background:yellow;}
-.pixel.px_7{background:grey;}
-.pixel.px_8{background:red;}
-.pixel.px_9{background:blue;}
-.pixel.px_10{background:black;}
-.pixel.px_11{background:green;}
-.pixel.px_12{background:orange;}
-.pixel.px_13{background:yellow;}
-.pixel.px_14{background:grey;}
-.pixel.px_15{background:red;}
-.pixel.px_16{background:blue;}
-.pixel.px_17{background:black;}
-.pixel.px_18{background:green;}
-.pixel.px_19{background:orange;}
-.pixel.px_20{background:yellow;}
+.pixel.px_1{background:#36b9da;}
 
 .element{
 	position:absolute;
