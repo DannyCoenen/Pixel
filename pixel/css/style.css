@@ -31,3 +31,10 @@ body{
 .pixel.px_18{background:green;}
 .pixel.px_19{background:orange;}
 .pixel.px_20{background:yellow;}
+
+.element{
+	position:absolute;
+	width:2px; height:2px;
+}
+
+.element.el_1{background:red;}
