@@ -3,6 +3,8 @@
 ************************************************/
 $(document).ready( function() {
 	
+	localStorage.clear();
+	
 	var wHeight = $(document).height(); 
 	var wWidth = $(document).width();
 	
@@ -63,6 +65,14 @@ function spawnElement(wHeight, wWidth){
 function animatePixel(px, wHeight, wWidth){
 	var pixel = $(px).offset();
 	var size = $(px).height();
+	
+	
+	if(localStorage.getItem("dirH" + px) == null){
+		alert('Starting Game');
+		localStorage.setItem("dirH" + px, "plus");
+		localStorage.setItem("dirW" + px, "plus");
+	}
+	
 	
 	// border detection X
 	if(pixel.top >= wHeight - size){

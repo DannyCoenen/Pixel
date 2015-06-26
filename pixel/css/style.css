@@ -10,6 +10,7 @@ body{
 .pixel{
 	position:absolute;
 	width:4px; height:4px;
+	top:50%; left:50%;
 }
 
 .pixel.px_1{background:#36b9da;}
