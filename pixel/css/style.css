@@ -10,10 +10,25 @@ body{
 .pixel{
 	position:absolute;
 	width:4px; height:4px;
-	top:50%; left:50%;
+	background:#da9636;
 }
 
-.pixel.px_1{background:#36b9da;}
+.pixel.px_1{
+	top:50%; left:50%;
+	background:#36b9da;
+}
+.pixel.px_2{
+	top:0%; left:0%;
+}
+.pixel.px_3{
+	top:0%; left:100%;
+}
+.pixel.px_4{
+	top:100%; left:100%;
+}
+.pixel.px_5{
+	top:100%; left:0%;
+}
 
 .element{
 	position:absolute;

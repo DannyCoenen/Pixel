@@ -9,6 +9,10 @@ $(document).ready( function() {
 	var wWidth = $(document).width();
 	
 	setInterval(function() {animatePixel('.px_1', wHeight, wWidth);}, speed('fixed'));
+	setInterval(function() {animatePixel('.px_2', wHeight, wWidth);}, speed('fixed'));
+	setInterval(function() {animatePixel('.px_3', wHeight, wWidth);}, speed('fixed'));
+	setInterval(function() {animatePixel('.px_4', wHeight, wWidth);}, speed('fixed'));
+	setInterval(function() {animatePixel('.px_5', wHeight, wWidth);}, speed('fixed'));
 	setInterval(function() {spawnElement(wHeight, wWidth)}, 500);
 	
 	control('.px_1');
@@ -66,21 +70,18 @@ function animatePixel(px, wHeight, wWidth){
 	var pixel = $(px).offset();
 	var size = $(px).height();
 	
-	
 	if(localStorage.getItem("dirH" + px) == null){
-		alert('Starting Game');
 		localStorage.setItem("dirH" + px, "plus");
 		localStorage.setItem("dirW" + px, "plus");
 	}
 	
-	
 	// border detection X
 	if(pixel.top >= wHeight - size){
 		localStorage.setItem("dirH" + px, "min");
-		console.log('i am going up');
+		//console.log('i am going up');
 	}else if(pixel.top <= 0){
 		localStorage.setItem("dirH" + px, "plus");
-		console.log('i am going down');
+		//console.log('i am going down');
 	}
 	// animate height
 	if(localStorage.getItem("dirH" + px) == "min"){
@@ -92,10 +93,10 @@ function animatePixel(px, wHeight, wWidth){
 	// border detection Y
 	if(pixel.left >= wWidth - size){
 		localStorage.setItem("dirW" + px, "min");
-		console.log('i am going left');
+		//console.log('i am going left');
 	}else if(pixel.left <= 0){
 		localStorage.setItem("dirW" + px, "plus");
-		console.log('i am going right');
+		//console.log('i am going right');
 	}
 	// animate width
 	if(localStorage.getItem("dirW" + px) == "min"){
@@ -112,7 +113,7 @@ function animatePixel(px, wHeight, wWidth){
 		if(element.top >= pixel.top && element.top <= pixel.top + size && element.left >= pixel.left && element.left <= pixel.left + size){
 			$(this).remove();
 			$(px).animate({width: "+=1", height: "+=1"}, 0);
-			console.log('element ' + index + ': has been eaten');
+			//console.log('element ' + index + ': has been eaten');
 		}
 	});
 
