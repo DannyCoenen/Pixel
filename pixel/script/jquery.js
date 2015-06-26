@@ -1,3 +1,6 @@
+/************************************************
+ Start Events
+************************************************/
 $(document).ready( function() {
 	
 	var wHeight = $(document).height(); 
@@ -5,8 +8,31 @@ $(document).ready( function() {
 	
 	setInterval(function() {animatePixel('.px_1', wHeight, wWidth);}, speed('fixed'));
 	setInterval(function() {spawnElement(wHeight, wWidth)}, 500);
-
+	
+	control('.px_1');
+	
 });
+
+/************************************************
+ Controls
+************************************************/
+function control(px){
+	$(function() {
+		$(document).keyup(function(evt) {
+			if (evt.keyCode == 32) {
+				if(localStorage.getItem("dirH" + px) == "min"){
+					localStorage.setItem("dirH" + px, "plus");
+				}else if(localStorage.getItem("dirH" + px) == "plus"){
+					localStorage.setItem("dirH" + px, "min");
+				} 
+			}
+		}).keydown(function(evt) {
+			if (evt.keyCode == 32) {
+			}
+		});
+	});	
+}
+
 
 /************************************************
  set speed
@@ -32,13 +58,13 @@ function spawnElement(wHeight, wWidth){
 }
 
 /************************************************
- pixel brains
+ pixel(character) brains
 ************************************************/
 function animatePixel(px, wHeight, wWidth){
 	var pixel = $(px).offset();
 	var size = $(px).height();
 	
-	// animate height
+	// border detection X
 	if(pixel.top >= wHeight - size){
 		localStorage.setItem("dirH" + px, "min");
 		console.log('i am going up');
@@ -46,13 +72,14 @@ function animatePixel(px, wHeight, wWidth){
 		localStorage.setItem("dirH" + px, "plus");
 		console.log('i am going down');
 	}
+	// animate height
 	if(localStorage.getItem("dirH" + px) == "min"){
 		$(px).animate({top: "-=1"}, 0);
 	}else if(localStorage.getItem("dirH" + px) == "plus"){
 		$(px).animate({top: "+=1"}, 0);
 	}
 	
-	// animate width
+	// border detection Y
 	if(pixel.left >= wWidth - size){
 		localStorage.setItem("dirW" + px, "min");
 		console.log('i am going left');
@@ -60,6 +87,7 @@ function animatePixel(px, wHeight, wWidth){
 		localStorage.setItem("dirW" + px, "plus");
 		console.log('i am going right');
 	}
+	// animate width
 	if(localStorage.getItem("dirW" + px) == "min"){
 		$(px).animate({left: "-=1"}, 0);
 	}else if(localStorage.getItem("dirW" + px) == "plus"){
