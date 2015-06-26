@@ -4,6 +4,7 @@
 $(document).ready( function() {
 	
 	localStorage.clear();
+	$('.border').hide();
 	
 	var wHeight = $(document).height(); 
 	var wWidth = $(document).width();
@@ -59,7 +60,6 @@ function spawnElement(wHeight, wWidth){
 		var coodTop = Math.floor((Math.random() * wHeight) + 1) + 'px';
 		var coodLeft = Math.floor((Math.random() * wWidth) + 1) + 'px';
 		$('<div style="top:' + coodTop + '; left:' + coodLeft + ';" class="element el_1"></div>').hide().appendTo('body').fadeIn(1000);
-		//$('<div style="top:342px; left:320px;" class="element el_1"></div>').appendTo('body');
 	}
 }
 
@@ -78,9 +78,11 @@ function animatePixel(px, wHeight, wWidth){
 	// border detection X
 	if(pixel.top >= wHeight - size){
 		localStorage.setItem("dirH" + px, "min");
+		$('.borderBottom').stop().fadeIn(50).fadeOut(500);
 		//console.log('i am going up');
 	}else if(pixel.top <= 0){
 		localStorage.setItem("dirH" + px, "plus");
+		$('.borderTop').stop().fadeIn(50).fadeOut(500);
 		//console.log('i am going down');
 	}
 	// animate height
@@ -93,9 +95,11 @@ function animatePixel(px, wHeight, wWidth){
 	// border detection Y
 	if(pixel.left >= wWidth - size){
 		localStorage.setItem("dirW" + px, "min");
+		$('.borderRight').stop().fadeIn(50).fadeOut(500);
 		//console.log('i am going left');
 	}else if(pixel.left <= 0){
 		localStorage.setItem("dirW" + px, "plus");
+		$('.borderLeft').stop().fadeIn(50).fadeOut(500);
 		//console.log('i am going right');
 	}
 	// animate width
