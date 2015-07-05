@@ -9,28 +9,30 @@ $(document).ready( function() {
 	var wHeight = $(document).height(); 
 	var wWidth = $(document).width();
 	
-	setInterval(function() {animatePixel('.px_1', wHeight, wWidth);}, speed('fixed'));
-	setInterval(function() {animatePixel('.px_2', wHeight, wWidth);}, speed('fixed'));
-	setInterval(function() {animatePixel('.px_3', wHeight, wWidth);}, speed('fixed'));
-	setInterval(function() {animatePixel('.px_4', wHeight, wWidth);}, speed('fixed'));
-	setInterval(function() {animatePixel('.px_5', wHeight, wWidth);}, speed('fixed'));
+	setInterval(function() {pixelFunction('.px_1', wHeight, wWidth);}, 1);
+	setInterval(function() {pixelFunction('.px_2', wHeight, wWidth);}, 1);
+	setInterval(function() {pixelFunction('.px_3', wHeight, wWidth);}, 1);
+	setInterval(function() {pixelFunction('.px_4', wHeight, wWidth);}, 1);
+	setInterval(function() {pixelFunction('.px_5', wHeight, wWidth);}, 1);
 	setInterval(function() {spawnElement(wHeight, wWidth)}, 500);
 	
-	control('.px_1');
+	control('.px_1', wWidth);
 	
 });
 
 /************************************************
  Controls
 ************************************************/
-function control(px){
+function control(px, wWidth){
 	$(function() {
 		$(document).keyup(function(evt) {
 			if (evt.keyCode == 32) {
 				if(localStorage.getItem("dirH" + px) == "min"){
 					localStorage.setItem("dirH" + px, "plus");
+					pixelAnimation(px, wWidth);
 				}else if(localStorage.getItem("dirH" + px) == "plus"){
 					localStorage.setItem("dirH" + px, "min");
+					pixelAnimation(px, wWidth);
 				} 
 			}
 		}).keydown(function(evt) {
@@ -38,18 +40,6 @@ function control(px){
 			}
 		});
 	});	
-}
-
-
-/************************************************
- set speed
-************************************************/
-function speed(mode){
-	if(mode == 'fixed'){
-		return 1;
-	}else if(mode == 'random'){
-		return Math.floor((Math.random() * 50) + 1);
-	}
 }
 
 /************************************************
@@ -64,49 +54,58 @@ function spawnElement(wHeight, wWidth){
 }
 
 /************************************************
- pixel(character) brains
+ pixel animate
 ************************************************/
-function animatePixel(px, wHeight, wWidth){
+function pixelAnimation(px, wWidth){
+
+	var distance = wWidth;
+	
+	//animation
+	if(localStorage.getItem("dirH" + px) == "min" && localStorage.getItem("dirW" + px) == "min"){
+		$(px).stop().animate({top: "-=" + distance, left: "-=" + distance}, 5000, 'linear');
+	}else if(localStorage.getItem("dirH" + px) == "plus" && localStorage.getItem("dirW" + px) == "plus"){
+		$(px).stop().animate({top: "+=" + distance, left: "+=" + distance}, 5000, 'linear');
+	}else if(localStorage.getItem("dirH" + px) == "plus" && localStorage.getItem("dirW" + px) == "min"){
+		$(px).stop().animate({top: "+=" + distance, left: "-=" + distance}, 5000, 'linear');
+	}else if(localStorage.getItem("dirH" + px) == "min" && localStorage.getItem("dirW" + px) == "plus"){
+		$(px).stop().animate({top: "-=" + distance, left: "+=" + distance}, 5000, 'linear');
+	}
+
+}
+
+/************************************************
+ pixel function
+************************************************/
+function pixelFunction(px, wHeight, wWidth){
 	var pixel = $(px).offset();
 	var size = $(px).height();
 	
 	if(localStorage.getItem("dirH" + px) == null){
 		localStorage.setItem("dirH" + px, "plus");
 		localStorage.setItem("dirW" + px, "plus");
+		pixelAnimation(px, wWidth);
 	}
 	
 	// border detection X
 	if(pixel.top >= wHeight - size){
 		localStorage.setItem("dirH" + px, "min");
 		$('.borderBottom').stop().fadeIn(50).fadeOut(500);
-		//console.log('i am going up');
+		pixelAnimation(px, wWidth);
 	}else if(pixel.top <= 0){
 		localStorage.setItem("dirH" + px, "plus");
 		$('.borderTop').stop().fadeIn(50).fadeOut(500);
-		//console.log('i am going down');
+		pixelAnimation(px, wWidth);
 	}
-	// animate height
-	if(localStorage.getItem("dirH" + px) == "min"){
-		$(px).animate({top: "-=1"}, 0);
-	}else if(localStorage.getItem("dirH" + px) == "plus"){
-		$(px).animate({top: "+=1"}, 0);
-	}
-	
+
 	// border detection Y
 	if(pixel.left >= wWidth - size){
 		localStorage.setItem("dirW" + px, "min");
 		$('.borderRight').stop().fadeIn(50).fadeOut(500);
-		//console.log('i am going left');
+		pixelAnimation(px, wWidth);
 	}else if(pixel.left <= 0){
 		localStorage.setItem("dirW" + px, "plus");
 		$('.borderLeft').stop().fadeIn(50).fadeOut(500);
-		//console.log('i am going right');
-	}
-	// animate width
-	if(localStorage.getItem("dirW" + px) == "min"){
-		$(px).animate({left: "-=1"}, 0);
-	}else if(localStorage.getItem("dirW" + px) == "plus"){
-		$(px).animate({left: "+=1"}, 0);
+		pixelAnimation(px, wWidth);
 	}
 	
 	// eat element
