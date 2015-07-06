@@ -46,7 +46,7 @@ function control(px){
 ************************************************/
 function speed(mode){
 	if(mode == 'fixed'){
-		return 1;
+		return 20;
 	}else if(mode == 'random'){
 		return Math.floor((Math.random() * 50) + 1);
 	}
@@ -64,7 +64,7 @@ function spawnElement(wHeight, wWidth){
 }
 
 /************************************************
- pixel(character) brains
+ pixel(character) functions
 ************************************************/
 function animatePixel(px, wHeight, wWidth){
 	var pixel = $(px).offset();
@@ -87,9 +87,9 @@ function animatePixel(px, wHeight, wWidth){
 	}
 	// animate height
 	if(localStorage.getItem("dirH" + px) == "min"){
-		$(px).animate({top: "-=1"}, 0);
+		$(px).animate({top: "-=4"}, 0);
 	}else if(localStorage.getItem("dirH" + px) == "plus"){
-		$(px).animate({top: "+=1"}, 0);
+		$(px).animate({top: "+=4"}, 0);
 	}
 	
 	// border detection Y
@@ -104,14 +104,13 @@ function animatePixel(px, wHeight, wWidth){
 	}
 	// animate width
 	if(localStorage.getItem("dirW" + px) == "min"){
-		$(px).animate({left: "-=1"}, 0);
+		$(px).animate({left: "-=4"}, 0);
 	}else if(localStorage.getItem("dirW" + px) == "plus"){
-		$(px).animate({left: "+=1"}, 0);
+		$(px).animate({left: "+=4"}, 0);
 	}
 	
 	// eat element
 	var element = '';
-	
 	$('.element').each(function(index) {
 		element = $(this).offset();
 		if(element.top >= pixel.top && element.top <= pixel.top + size && element.left >= pixel.left && element.left <= pixel.left + size){
