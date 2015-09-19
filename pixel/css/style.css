@@ -2,10 +2,15 @@
 /* CSS Document */
 
 body{
-	width:100%; height:100%;
 	overflow:hidden;
 	background:#333;
 }
+
+.playboard{
+	width:100%; height:100%;
+	overflow:hidden;
+}
+
 .border{
 	position:absolute;
 	background:#da3636;
